@@ -1,5 +1,5 @@
 resource "azurerm_network_interface" "" {
-  name                = ""
+  name                = "agent-test"
   location            = ""
   resource_group_name = ""
 
