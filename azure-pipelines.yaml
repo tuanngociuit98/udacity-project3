@@ -192,7 +192,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'UdacityDS - 66'     # ToDo
+              azureSubscription: 'UdacityDS-66'     # ToDo
               appName: 'webApp'               # ToDo
               appType: webApp
               package: $(Pipeline.Workspace)/webApp/webApp       # ToDo: Use the published zip artifact. 
