@@ -191,7 +191,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
-              appName: 'Udacity-project3'               # ToDo
+              appName: 'mywebapp17112023'               # ToDo
               appType: webApp
               package: $(Pipeline.Workspace)/$(Build.BuildId)/drop-fakerestapi.zip      # ToDo: Use the published zip artifact. 
           #--------------------------------------------#    
