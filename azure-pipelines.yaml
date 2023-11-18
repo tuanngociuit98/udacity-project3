@@ -172,7 +172,6 @@ stages:
     # - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
     #   displayName: 'Upload Package'
     #   artifact: drop-perftests
-
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
@@ -191,7 +190,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
-              appName: 'mywebapp1711'               # ToDo
+              appName: 'Udacity-Project3'               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           # Run JMeter test suite against the App Service
           # - task: CmdLine@2
