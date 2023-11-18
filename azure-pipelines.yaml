@@ -130,13 +130,12 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-    # - task: PublishTestResults@2
-    #   inputs:
-    #     testResultsFormat: 'JUnit'
-    #     testResultsFiles: '**/TEST-*.xml'
-    #     searchFolder:       # ToDo
-    #     mergeTestResults: true
-    #     testRunTitle:       # ToDo
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/JUnitReport*.xml'
+        testRunTitle: 'Publish test results'
+        searchFolder: 'automatedtesting/postman'
 
     # #--------------------------------------------#
     # # Selenium (UI) Test Suite - Archive the package  
@@ -170,17 +169,22 @@ stages:
     # #--------------------------------------------#  
     # # JMeter (Performance) Test Suite - Archive
     # # ToDo: Complete the ArchiveFiles@2 task and publish step 
-    # - task: ArchiveFiles@2
-    #   displayName: 'Archive PerformanceTestSuite'
-    #   inputs:
-    #     rootFolderOrFile: 
-    #     includeRootFolder: false
-    #     archiveType: 'zip'
-    #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
-    # # JMeter Test Suite - Publish    
-    # - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
-    #   displayName: 'Upload Package'
-    #   artifact: drop-perftests
+    - task: JMeterInstaller@0
+      displayName: 'Install JMeter 5.2.1'
+      inputs:
+        jmeterVersion: '5.2.1'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive PerformanceTestSuite'
+      inputs:
+        rootFolderOrFile: 
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
+    # JMeter Test Suite - Publish    
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
+      displayName: 'Upload Package'
+      artifact: drop-perftests
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
@@ -202,15 +206,15 @@ stages:
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           # Run JMeter test suite against the App Service
-          # - task: CmdLine@2
-          #   inputs:
-          #     script: |
-          #       wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
-          #       tar -xf apache-jmeter-5.2.1.tgz
-          #       unzip -o $(Build.BuildId)-perftests.zip
-          #       ./apache-jmeter-5.2.1/bin/jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
-          #       cat jmeter.log                                                                           
-          #     workingDirectory: $(Pipeline.Workspace)/drop-perftests$(Build.BuildId)-perftests.zip           # ToDo: Use the artifact name from the task above
+          - task: CmdLine@2
+            inputs:
+              script: |
+                wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
+                tar -xf apache-jmeter-5.2.1.tgz
+                unzip -o $(Build.BuildId)-perftests.zip
+                ./apache-jmeter-5.2.1/bin/jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
+                cat jmeter.log                                                                           
+              workingDirectory: $(Pipeline.Workspace)/drop-perftests/$(Build.BuildId)-perftests.zip           # ToDo: Use the artifact name from the task above
               
   # #--------------------------------------------#  
   # Selenium | Functional UI Tests
