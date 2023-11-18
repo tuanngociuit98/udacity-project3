@@ -248,7 +248,6 @@ stages:
           steps:
           - download: current
             artifact: drop-uitests     # ToDo: Change/provide a name
-            
           - task: Bash@3
             displayName: 'Selenium Tests'
             inputs:
