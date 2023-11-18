@@ -206,6 +206,7 @@ stages:
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           # Run JMeter test suite against the App Service
+          
           - task: CmdLine@2
             inputs:
               script: |
