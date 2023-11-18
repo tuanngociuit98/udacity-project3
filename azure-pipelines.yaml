@@ -140,15 +140,9 @@ stages:
     # #--------------------------------------------#
     # # Selenium (UI) Test Suite - Archive the package  
     # # "ArchiveFiles@2" picks up the web package and archives it.
-    - task: ArchiveFiles@2
-      displayName: 'Archive UI Tests'
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
+
     # Selenium Test Suite - Publish the package  
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip   # Same as the archiveFile artifact above. 
+    - publish: automatedtesting/selenium/functional_ui_test.py   # Same as the archiveFile artifact above. 
       displayName: 'Upload Package'
       artifact: drop-uitests
 
@@ -264,5 +258,5 @@ stages:
                 echo 'Hello from a custom VM with pre-installed Selenium, Chromium-browser & Chromedriver!'
                 source env/bin/activate
                 export PATH=$PATH:`pwd` # add chromedriver executable to path
-                python3 ../drop-ui-tests/functional_ui_test.py
+                python3 /home/azureuser/myagent/_work/1/s/drop-uitests/functional_ui_test.py
                 cat selenium.log
