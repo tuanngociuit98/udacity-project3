@@ -193,7 +193,7 @@ stages:
         script: |
           jmeter -n \
             -t automatedtesting/jmeter/EnduranceTestSuite.jmx \
-            -l endurance-test-report/Endurance-results.jtl \
+            -l Endurance-results.jtl \
             -e \
             -o endurance-test-report  
 #--------------------------------------------#  
