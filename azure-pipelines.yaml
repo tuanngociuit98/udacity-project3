@@ -196,6 +196,7 @@ stages:
             -l endurance-test-report/endurance-results.jtl \
             -e \
             -o endurance-test-report
+            
     - task: publishhtmlreport@1
       displayName: 'Publish Endurance Test Results'
       inputs:
