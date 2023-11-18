@@ -18,7 +18,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
   environmentName: 'test'
-
+  webapp: "webapp18112023"
 stages:
 #--------------------------------------------#  
 # BUILD STAGE
@@ -190,7 +190,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
-              appName: 'Udacity-Project3'               # ToDo
+              appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           # Run JMeter test suite against the App Service
           # - task: CmdLine@2
