@@ -187,15 +187,15 @@ stages:
       artifact: drop-perftests
 
     - task: Bash@3
-      displayName: 'Performance Test Suite'
+      displayName: 'Endurance Test Suite'
       inputs:
         targetType: 'inline'
         script: |
           jmeter -n \
             -t automatedtesting/jmeter/EnduranceTestSuite.jmx \
-            -l Endurance-results.jtl \
+            -l endurance-test-report/endurance-results.jtl \
             -e \
-            -o endurance-test-report  
+            -o endurance-test-report
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
