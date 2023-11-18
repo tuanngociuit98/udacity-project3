@@ -1,0 +1,14 @@
+{
+	"id": "b69ca6a6-00e1-4a1f-a713-fac4de7d012b",
+	"name": "UdacityAzureDevopsProject3",
+	"values": [
+		{
+			"key": "url",
+			"value": "https://webapp18112023.azurewebsites.net//api",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-11-18T15:11:52.172Z",
+	"_postman_exported_using": "Postman/8.0.6"
+}
