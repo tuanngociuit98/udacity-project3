@@ -167,7 +167,7 @@ stages:
       artifact: drop-fakerestapi
 
     # #--------------------------------------------#  
-    # # JMeter (Performance) Test Suite - Archive
+    # # JMeter (Endurance) Test Suite - Archive
     # # ToDo: Complete the ArchiveFiles@2 task and publish step 
     - task: JMeterInstaller@0
       displayName: 'Install JMeter 5.2.1'
@@ -175,7 +175,7 @@ stages:
         jmeterVersion: '5.2.1'
 
     - task: ArchiveFiles@2
-      displayName: 'Archive PerformanceTestSuite'
+      displayName: 'Archive EnduranceTestSuite'
       inputs:
         rootFolderOrFile: 
         includeRootFolder: false
@@ -192,10 +192,10 @@ stages:
         targetType: 'inline'
         script: |
           jmeter -n \
-            -t automatedtesting/jmeter/PerformanceTestSuite.jmx \
-            -l performance-test-report/performance-results.jtl \
+            -t automatedtesting/jmeter/EnduranceTestSuite.jmx \
+            -l endurance-test-report/Endurance-results.jtl \
             -e \
-            -o performance-test-report  
+            -o endurance-test-report  
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
