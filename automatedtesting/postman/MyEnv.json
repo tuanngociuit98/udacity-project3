@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "url",
-			"value": "https://webapp18112023.azurewebsites.net//api",
+			"value": "http://udacity-project3.azurewebsites.net/api",
 			"enabled": true
 		}
 	],
