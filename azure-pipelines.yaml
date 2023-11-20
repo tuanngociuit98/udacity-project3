@@ -237,7 +237,10 @@ stages:
   # ToDo: 
   - deployment: VMDeploy
     displayName: Selenium Tests
-    environment: deployment
+    environment: 
+      name:  'environment'
+      resourceType: VirtualMachine
+      tags: deployment
     strategy:
       runOnce:
         deploy:
@@ -251,7 +254,7 @@ stages:
               script: |
                 #! /bin/bash
                 sudo apt update,
-                sudo apt upgrade -y,
+                sudo apt upgrade -y
                 sudo apt install python3-pip -y
                 sudo apt install unzip -y
                 sudo apt install -y chromium-browser
