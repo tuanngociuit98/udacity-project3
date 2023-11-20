@@ -142,7 +142,7 @@ stages:
     # # "ArchiveFiles@2" picks up the web package and archives it.
 
     # Selenium Test Suite - Publish the package  
-    - publish: automatedtesting/selenium/app.py   # Same as the archiveFile artifact above. 
+    - publish: automatedtesting/selenium   # Same as the archiveFile artifact above. 
       displayName: 'Upload Package'
       artifact: drop-uitests
 
@@ -260,7 +260,7 @@ stages:
                 sudo pip3 install selenium==3.141.0 
                 export PATH=$PATH:/usr/lib/chromium-browser/
                 cd $(Pipeline.Workspace)/selenium
-                unzip -o $(Pipeline.Workspace)/selenium/$(Build.BuildId)-selenium-tests -d .
+                unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-selenium-tests -d .
           - bash: |
               cd $(Pipeline.Workspace)/s/automatedtesting/selenium
               rm -rf seleniumtestrun.log
