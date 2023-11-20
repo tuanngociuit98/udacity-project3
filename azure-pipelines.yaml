@@ -268,7 +268,6 @@ stages:
               python3 login.py
               ls -lah
               sudo cat seleniumtestrun.log
-              sudo cp seleniumtestrun.log /var/log/selenium/
             displayName: Run Selenium Test-Suite
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Result logs
