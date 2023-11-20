@@ -260,7 +260,7 @@ stages:
                 sudo pip3 install selenium==3.141.0 
                 export PATH=$PATH:/usr/lib/chromium-browser/
                 cd $(Pipeline.Workspace)/selenium
-                unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-selenium-tests -d .
+                unzip -o $(Pipeline.Workspace)/1/drop-uitests/$(Build.BuildId)-selenium-tests -d .
           - bash: |
               cd $(Pipeline.Workspace)/s/automatedtesting/selenium
               rm -rf seleniumtestrun.log
