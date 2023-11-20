@@ -260,9 +260,9 @@ stages:
                 sudo pip3 install selenium==3.141.0 
                 export PATH=$PATH:/usr/lib/chromium-browser/
                 cd $(Pipeline.Workspace)/selenium
-                unzip -o $(Pipeline.Workspace)/1/drop-uitests/$(Build.BuildId)-selenium-tests -d .
+                unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-selenium-tests -d .
           - bash: |
-              cd $(Pipeline.Workspace)/s/automatedtesting/selenium
+              cd $(Pipeline.Workspace)/drop-uitests
               rm -rf seleniumtestrun.log
               pwd
               python3 login.py
@@ -273,5 +273,5 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Result logs
             inputs:
-              targetPath: '$(Pipeline.Workspace)/selenium/seleniumtestrun.log'
+              targetPath: '$(Pipeline.Workspace)/drop-uitests/seleniumtestrun.log'
               artifactName: 'SeleniumTestResult'
