@@ -206,7 +206,6 @@ stages:
             -l stress-test-report/stress-results.jtl \
             -e \
             -o stress-test-report
-
     - task: publishhtmlreport@1
       displayName: 'Publish Stress Test Results'
       inputs:
@@ -253,16 +252,16 @@ stages:
                 #! /bin/bash
                 sudo apt update,
                 sudo apt upgrade -y,
-                sudo apt install python3-pip -y,
-                sudo apt install unzip -y,
-                sudo apt install -y chromium-browser,
-                sudo apt install python3-venv,
-                sudo python3 -m venv env,
-                sudo pip3 install selenium,
-                sudo wget https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip,
-                sudo unzip chromedriver_linux64.zip,
-                sudo rm chromedriver_linux64.zip,
-                sudo chown root:root chromedriver,
+                sudo apt install python3-pip -y
+                sudo apt install unzip -y
+                sudo apt install -y chromium-browser
+                sudo apt install python3-venv
+                sudo python3 -m venv env
+                sudo pip3 install selenium
+                sudo wget https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
+                sudo unzip chromedriver_linux64.zip
+                sudo rm chromedriver_linux64.zip
+                sudo chown root:root chromedriver
                 sudo chmod 777 chromedriver
                 echo 'Hello from a custom VM with pre-installed Selenium, Chromium-browser & Chromedriver!'
                 source env/bin/activate
