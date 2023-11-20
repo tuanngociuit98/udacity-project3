@@ -30,23 +30,23 @@ stages:
     #--------------------------------------------#  
     # Use Terraform to create the Infrastructure      
     # Install Terraform on the pipeline agent 
-    - task: TerraformInstaller@1
-      displayName: 'Terrafom installation'
-      inputs:
-        terraformVersion: '1.2.9'
-    # Run Terraform Init on the pipeline agent 
-    # ToDo: Replace the resource group name, storage account name, and container name below
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-      displayName: 'Terrafom init'
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        backendServiceArm: '$(azureServiceConnectionId)'
-        backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate1684513516'
-        backendAzureRmContainerName: 'tfstate'
-        backendAzureRmKey: 'test.terraform.tfstate'
+    # - task: TerraformInstaller@1
+    #   displayName: 'Terrafom installation'
+    #   inputs:
+    #     terraformVersion: '1.2.9'
+    # # Run Terraform Init on the pipeline agent 
+    # # ToDo: Replace the resource group name, storage account name, and container name below
+    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    #   displayName: 'Terrafom init'
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'init'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+    #     backendServiceArm: '$(azureServiceConnectionId)'
+    #     backendAzureRmResourceGroupName: 'Azuredevops'
+    #     backendAzureRmStorageAccountName: 'tfstate280815420'
+    #     backendAzureRmContainerName: 'tfstate'
+    #     backendAzureRmKey: 'test.terraform.tfstate'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
       displayName: Terraform validate
