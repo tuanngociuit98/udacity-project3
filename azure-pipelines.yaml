@@ -30,29 +30,29 @@ stages:
     #--------------------------------------------#  
     # Use Terraform to create the Infrastructure      
     # Install Terraform on the pipeline agent 
-    # - task: TerraformInstaller@1
-    #   displayName: 'Terrafom installation'
-    #   inputs:
-    #     terraformVersion: '1.2.9'
+    - task: TerraformInstaller@1
+      displayName: 'Terrafom installation'
+      inputs:
+        terraformVersion: '1.2.9'
     # # Run Terraform Init on the pipeline agent 
     # # ToDo: Replace the resource group name, storage account name, and container name below
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-    #   displayName: 'Terrafom init'
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'init'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     backendServiceArm: '$(azureServiceConnectionId)'
-    #     backendAzureRmResourceGroupName: 'Azuredevops'
-    #     backendAzureRmStorageAccountName: 'tfstate280815420'
-    #     backendAzureRmContainerName: 'tfstate'
-    #     backendAzureRmKey: 'test.terraform.tfstate'
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+      displayName: 'Terrafom init'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        backendServiceArm: '$(azureServiceConnectionId)'
+        backendAzureRmResourceGroupName: 'Azuredevops'
+        backendAzureRmStorageAccountName: 'tfstate439264'
+        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmKey: 'test.terraform.tfstate'
 
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-    #   displayName: Terraform validate
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'validate'
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+      displayName: Terraform validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
 
     # # OPTIONAL - This step is needed only if your Terraform VM uses an SSH key pair for login and you want your pipeline agent to connect to it. 
     # # Generate an SSH key pair in your local/AZ Cloud shell. Use the public key in the Terraform VM module. 
@@ -72,23 +72,23 @@ stages:
 
     
     # # Run Terraform Apply
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-    #   displayName: Terraform apply
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'apply'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+      displayName: Terraform apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
     # # ToDo: Change the workingDirectory path, as applicable to you
     # # Destroy the resources in Azure by running a separate pipeline. 
-    # - task: TerraformTaskV3@3
-    #   displayName: Terraform destroy
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'destroy'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    - task: TerraformTaskV3@3
+      displayName: Terraform destroy
+      inputs:
+        provider: 'azurerm'
+        command: 'destroy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
 #--------------------------------------------#    
     # Postman - Install Newman    
@@ -143,135 +143,135 @@ stages:
     # # "ArchiveFiles@2" picks up the web package and archives it.
 
     # Selenium Test Suite - Publish the package  
-#     - publish: automatedtesting/selenium   # Same as the archiveFile artifact above. 
-#       displayName: 'Upload Package'
-#       artifact: drop-uitests
+    - publish: automatedtesting/selenium   # Same as the archiveFile artifact above. 
+      displayName: 'Upload Package'
+      artifact: drop-uitests
 
 #     # #--------------------------------------------#    
 #     # # FakeRestAPI - Archive
 #     # # ToDo: Complete the ArchiveFiles@2 task and publish step 
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive FakeRestAPI'
-#       inputs:
-#         rootFolderOrFile: $(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi
-#         includeRootFolder: false
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
-#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
-#       displayName: 'Upload Package'
-#       artifact: drop-fakerestapi
+    - task: ArchiveFiles@2
+      displayName: 'Archive FakeRestAPI'
+      inputs:
+        rootFolderOrFile: $(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+      displayName: 'Upload Package'
+      artifact: drop-fakerestapi
 
 #     # #--------------------------------------------#  
 #     # # JMeter (Endurance) Test Suite - Archive
 #     # # ToDo: Complete the ArchiveFiles@2 task and publish step 
-#     - task: JMeterInstaller@0
-#       displayName: 'Install JMeter 5.2.1'
-#       inputs:
-#         jmeterVersion: '5.2.1'
+    - task: JMeterInstaller@0
+      displayName: 'Install JMeter 5.2.1'
+      inputs:
+        jmeterVersion: '5.2.1'
 
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive EnduranceTestSuite'
-#       inputs:
-#         rootFolderOrFile: 
-#         includeRootFolder: false
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
+    - task: ArchiveFiles@2
+      displayName: 'Archive EnduranceTestSuite'
+      inputs:
+        rootFolderOrFile: 
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
 #     # JMeter Test Suite - Publish    
-#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
-#       displayName: 'Upload Package'
-#       artifact: drop-perftests
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
+      displayName: 'Upload Package'
+      artifact: drop-perftests
 
-#     - task: Bash@3
-#       displayName: 'Endurance Test Suite'
-#       inputs:
-#         targetType: 'inline'
-#         script: |
-#           jmeter -n \
-#             -t automatedtesting/jmeter/EnduranceTestSuite.jmx \
-#             -l endurance-test-report/endurance-results.jtl \
-#             -e \
-#             -o endurance-test-report
-#     - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
-#       displayName: 'Publish Endurance Test Results'
-#       inputs:
-#         htmlType: 'Jmeter'
-#         JmeterReportsPath: '$(Build.SourcesDirectory)/endurance-test-report'    
+    - task: Bash@3
+      displayName: 'Endurance Test Suite'
+      inputs:
+        targetType: 'inline'
+        script: |
+          jmeter -n \
+            -t automatedtesting/jmeter/EnduranceTestSuite.jmx \
+            -l endurance-test-report/endurance-results.jtl \
+            -e \
+            -o endurance-test-report
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
+      displayName: 'Publish Endurance Test Results'
+      inputs:
+        htmlType: 'Jmeter'
+        JmeterReportsPath: '$(Build.SourcesDirectory)/endurance-test-report'    
 
-#     - task: Bash@3
-#       displayName: 'Stress Test Suite'
-#       inputs:
-#         targetType: 'inline'
-#         script: |
-#           jmeter -n \
-#             -t automatedtesting/jmeter/StressTestSuite.jmx \
-#             -l stress-test-report/stress-results.jtl \
-#             -e \
-#             -o stress-test-report
-#     - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
-#       displayName: 'Publish Stress Test Results'
-#       inputs:
-#         htmlType: 'Jmeter'
-#         JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'          
-# #--------------------------------------------#  
-# # DEPLOYMENT STAGE
-# # #--------------------------------------------#    
-# - stage: Deploy
-#   jobs:
-#   #--------------------------------------------#  
-#   # Deploy FakeRestAPI Web App
-#   # ToDo: Provide <environment name> you created in your DevOps project
-#   - deployment: FakeRestAPI    
-#     environment: deployment   # ToDo
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - task: AzureWebApp@1
-#             displayName: 'Deploy Azure Web App'
-#             inputs:
-#               azureSubscription: $(azureServiceConnectionId)     # ToDo
-#               appName: $(webapp)               # ToDo
-#               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+    - task: Bash@3
+      displayName: 'Stress Test Suite'
+      inputs:
+        targetType: 'inline'
+        script: |
+          jmeter -n \
+            -t automatedtesting/jmeter/StressTestSuite.jmx \
+            -l stress-test-report/stress-results.jtl \
+            -e \
+            -o stress-test-report
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
+      displayName: 'Publish Stress Test Results'
+      inputs:
+        htmlType: 'Jmeter'
+        JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'          
+#--------------------------------------------#  
+# DEPLOYMENT STAGE
+# #--------------------------------------------#    
+- stage: Deploy
+  jobs:
+  #--------------------------------------------#  
+  # Deploy FakeRestAPI Web App
+  # ToDo: Provide <environment name> you created in your DevOps project
+  - deployment: FakeRestAPI    
+    environment: deployment   # ToDo
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: $(azureServiceConnectionId)     # ToDo
+              appName: $(webapp)               # ToDo
+              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
         
-#   # #--------------------------------------------#  
-#   # Selenium | Functional UI Tests
-#   # ToDo: 
-#   - deployment: VMDeploy
-#     displayName: Selenium Tests
-#     environment: 
-#       name:  'deployment'
-#       resourceType: VirtualMachine
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - download: current
-#             artifact: drop-uitests     # ToDo: Change/provide a name
-#           - task: Bash@3
-#             displayName: 'Selenium Tests'
-#             inputs:
-#               targetType: 'inline'
-#               script: |
-#                 #! /bin/bash               
-#                 sudo apt-get update -y
-#                 sudo apt-get install python3-pip -y
-#                 sudo apt-get install -y chromium-browser
-#                 sudo apt-get install -y chromium-chromedriver
-#                 sudo python3 -m pip install --upgrade pip
-#                 sudo pip3 install selenium==3.141.0 
-#                 export PATH=$PATH:/usr/lib/chromium-browser/
-#                 cd $(Pipeline.Workspace)/drop-uitests
+  # #--------------------------------------------#  
+  # Selenium | Functional UI Tests
+  # ToDo: 
+  - deployment: VMDeploy
+    displayName: Selenium Tests
+    environment: 
+      name:  'deployment'
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop-uitests     # ToDo: Change/provide a name
+          - task: Bash@3
+            displayName: 'Selenium Tests'
+            inputs:
+              targetType: 'inline'
+              script: |
+                #! /bin/bash               
+                sudo apt-get update -y
+                sudo apt-get install python3-pip -y
+                sudo apt-get install -y chromium-browser
+                sudo apt-get install -y chromium-chromedriver
+                sudo python3 -m pip install --upgrade pip
+                sudo pip3 install selenium==3.141.0 
+                export PATH=$PATH:/usr/lib/chromium-browser/
+                cd $(Pipeline.Workspace)/drop-uitests
           
-#           - bash: |
-#               cd $(Pipeline.Workspace)/drop-uitests
-#               rm -rf seleniumtestrun.log
-#               pwd
-#               python3 login.py
-#               ls -lah
-#               sudo cat seleniumtestrun.log
-#             displayName: Run Selenium Test-Suite
-#           - task: PublishPipelineArtifact@1
-#             displayName: Publish Selenium Result logs
-#             inputs:
-#               targetPath: '$(Pipeline.Workspace)/drop-uitests/seleniumtestrun.log'
-#               artifactName: 'SeleniumTestResult'
+          - bash: |
+              cd $(Pipeline.Workspace)/drop-uitests
+              rm -rf seleniumtestrun.log
+              pwd
+              python3 login.py
+              ls -lah
+              sudo cat seleniumtestrun.log
+            displayName: Run Selenium Test-Suite
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Selenium Result logs
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/drop-uitests/seleniumtestrun.log'
+              artifactName: 'SeleniumTestResult'
