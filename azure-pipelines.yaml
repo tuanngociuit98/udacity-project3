@@ -109,7 +109,9 @@ stages:
             inputs:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
               appName: $(webapp)               # ToDo
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+              package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
+
+
 - stage: Test
   jobs:
   - job: BuildInfrastructure
