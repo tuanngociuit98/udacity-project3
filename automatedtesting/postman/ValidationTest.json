@@ -228,7 +228,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Activities?activity=activity123",
+					"raw": "{{url}}/Activities?activity=activity123!@#",
 					"host": [
 						"{{url}}"
 					],
