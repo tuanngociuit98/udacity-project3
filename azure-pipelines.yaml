@@ -231,7 +231,6 @@ stages:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-        
   # #--------------------------------------------#  
   # Selenium | Functional UI Tests
   # ToDo: 
