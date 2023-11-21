@@ -93,7 +93,41 @@ stages:
 #--------------------------------------------#    
     # Postman - Install Newman    
     # ToDo: Update the command and verify the working directory
-    - task: NodeTool@0
+          
+#--------------------------------------------#  
+# DEPLOYMENT STAGE
+# #--------------------------------------------#    
+- stage: Deploy
+  jobs:
+  #--------------------------------------------#  
+  # Deploy FakeRestAPI Web App
+  # ToDo: Provide <environment name> you created in your DevOps project
+  - deployment: FakeRestAPI    
+    environment: deployment   # ToDo
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: $(azureServiceConnectionId)     # ToDo
+              appName: $(webapp)               # ToDo
+              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+        
+  # #--------------------------------------------#  
+  # Selenium | Functional UI Tests
+  # ToDo: 
+  - deployment: VMDeploy
+    displayName: Selenium Tests
+    environment: 
+      name:  'deployment'
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+              - task: NodeTool@0
       displayName: Install Node v16.X
       inputs:
         versionSpec: '16.x'
@@ -211,40 +245,7 @@ stages:
       displayName: 'Publish Stress Test Results'
       inputs:
         htmlType: 'Jmeter'
-        JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'          
-#--------------------------------------------#  
-# DEPLOYMENT STAGE
-# #--------------------------------------------#    
-- stage: Deploy
-  jobs:
-  #--------------------------------------------#  
-  # Deploy FakeRestAPI Web App
-  # ToDo: Provide <environment name> you created in your DevOps project
-  - deployment: FakeRestAPI    
-    environment: deployment   # ToDo
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: $(azureServiceConnectionId)     # ToDo
-              appName: $(webapp)               # ToDo
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-        
-  # #--------------------------------------------#  
-  # Selenium | Functional UI Tests
-  # ToDo: 
-  - deployment: VMDeploy
-    displayName: Selenium Tests
-    environment: 
-      name:  'deployment'
-      resourceType: VirtualMachine
-    strategy:
-      runOnce:
-        deploy:
-          steps:
+        JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'
           - download: current
             artifact: drop-uitests     # ToDo: Change/provide a name
           - task: Bash@3
