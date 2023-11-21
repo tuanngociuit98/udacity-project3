@@ -89,15 +89,11 @@ stages:
         command: 'destroy'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-
-#--------------------------------------------#    
-    # Postman - Install Newman    
-    # ToDo: Update the command and verify the working directory
-          
+    
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
-- stage: Deploy
+- stage: Deploy FakeAPI WEB APP
   jobs:
   #--------------------------------------------#  
   # Deploy FakeRestAPI Web App
@@ -114,20 +110,15 @@ stages:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-        
-  # #--------------------------------------------#  
-  # Selenium | Functional UI Tests
-  # ToDo: 
-  - deployment: VMDeploy
-    displayName: Selenium Tests
-    environment: 
-      name:  'deployment'
-      resourceType: VirtualMachine
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-              - task: NodeTool@0
+
+- stage: Test
+  jobs:
+  - job: BuildInfrastructure
+    steps:
+#--------------------------------------------#    
+    # Postman - Install Newman    
+    # ToDo: Update the command and verify the working directory
+    - task: NodeTool@0
       displayName: Install Node v16.X
       inputs:
         versionSpec: '16.x'
@@ -245,7 +236,19 @@ stages:
       displayName: 'Publish Stress Test Results'
       inputs:
         htmlType: 'Jmeter'
-        JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'
+        JmeterReportsPath: '$(Build.SourcesDirectory)/stress-test-report'        
+  # #--------------------------------------------#  
+  # Selenium | Functional UI Tests
+  # ToDo: 
+  - deployment: VMDeploy
+    displayName: Selenium Tests
+    environment: 
+      name:  'deployment'
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
           - download: current
             artifact: drop-uitests     # ToDo: Change/provide a name
           - task: Bash@3
