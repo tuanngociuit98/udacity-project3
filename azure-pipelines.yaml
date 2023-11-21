@@ -190,7 +190,7 @@ stages:
             -e \
             -o endurance-test-report
 
-    - task: publishhtmlreport@1
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport
       displayName: 'Publish Endurance Test Results'
       inputs:
         htmlType: 'Jmeter'
@@ -206,7 +206,7 @@ stages:
             -l stress-test-report/stress-results.jtl \
             -e \
             -o stress-test-report
-    - task: publishhtmlreport@1
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport
       displayName: 'Publish Stress Test Results'
       inputs:
         htmlType: 'Jmeter'
@@ -231,6 +231,7 @@ stages:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+        
   # #--------------------------------------------#  
   # Selenium | Functional UI Tests
   # ToDo: 
@@ -259,6 +260,7 @@ stages:
                 sudo pip3 install selenium==3.141.0 
                 export PATH=$PATH:/usr/lib/chromium-browser/
                 cd $(Pipeline.Workspace)/drop-uitests
+          
           - bash: |
               cd $(Pipeline.Workspace)/drop-uitests
               rm -rf seleniumtestrun.log
