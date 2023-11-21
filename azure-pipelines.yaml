@@ -260,7 +260,6 @@ stages:
                 sudo pip3 install selenium==3.141.0 
                 export PATH=$PATH:/usr/lib/chromium-browser/
                 cd $(Pipeline.Workspace)/drop-uitests
-          
           - bash: |
               cd $(Pipeline.Workspace)/drop-uitests
               rm -rf seleniumtestrun.log
