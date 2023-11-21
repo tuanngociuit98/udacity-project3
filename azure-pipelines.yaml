@@ -115,7 +115,7 @@ stages:
            newman run RegressionTest.json \
             -e MyEnv.json \
             -r cli,junitfull \
-            --reporter-junitfull-export JUnitReportRegression.xml
+            --reporter-junit-export JUnitReportRegression.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
     # # ToDo: Verify the working directory
@@ -127,7 +127,7 @@ stages:
           newman run ValidationTest.json \
             -e MyEnv.json \
             -r cli,junitfull \
-            --reporter-junitfull-export JUnitReportValidation.xml
+            --reporter-junit-export JUnitReportValidation.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
