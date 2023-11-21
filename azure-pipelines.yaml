@@ -93,7 +93,7 @@ stages:
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 # #--------------------------------------------#    
-- stage: Deploy FakeAPI WEB APP
+- stage: DeployFakeAPIWebApp
   jobs:
   #--------------------------------------------#  
   # Deploy FakeRestAPI Web App
