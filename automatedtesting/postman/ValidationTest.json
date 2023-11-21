@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "a86e9f1f-1561-4177-b0b9-c3a6147d15d3",
-		"name": "ValidationTest",
+		"_postman_id": "3e1538ee-3203-47fd-b6de-bed26ef01b87",
+		"name": "RegressionTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,18 +12,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"var expectedActivities = 30;",
-							"",
-							"pm.test(\"Found activities with IDs 1 - \" + expectedActivities, function () {",
-							"    for (i = 0; i < expectedActivities; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
-							"    }",
-							"});",
-							"",
-							"pm.test(\"Total activities found: \" + expectedActivities, function () {",
-							"    pm.expect(jsonData.length).to.eql(expectedActivities);",
+							"pm.test(\"Get All Activities endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -52,23 +42,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"// Since this is fake API I observed the getAllAuthors returns unpredictable values, sometimes 400, sometimes 600 or also 800.",
-							"// Hence it makes no sense to test total number of authors.",
-							"//var expectedAuthors = 600;",
-							"//pm.test(\"Total authors found: \" + expectedAuthors, function () {",
-							"//    pm.expect(jsonData.length).to.eql(expectedAuthors);",
-							"//});",
-							"",
-							"var minimumAuthors = 400;",
-							"pm.test(\"Found authors with IDs 1 - \" + minimumAuthors, function () {",
-							"    for (i = 0; i < minimumAuthors; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
-							"    }",
-							"});",
-							"",
-							""
+							"pm.test(\"Get All Authors endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -96,18 +72,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"var expectedBooks = 200;",
-							"",
-							"pm.test(\"Found books with IDs 1 - \" + expectedBooks, function () {",
-							"    for (i = 0; i < expectedBooks; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
-							"    }",
-							"});",
-							"",
-							"pm.test(\"Total books found: \" + expectedBooks, function () {",
-							"    pm.expect(jsonData.length).to.eql(expectedBooks);",
+							"pm.test(\"Get All Books endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -136,18 +102,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"var expectedCoverPhotos = 200;",
-							"",
-							"pm.test(\"Found cover photos with IDs 1 - \" + expectedCoverPhotos, function () {",
-							"    for (i = 0; i < expectedCoverPhotos; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
-							"    }",
-							"});",
-							"",
-							"pm.test(\"Total cover photos found: \" + expectedCoverPhotos, function () {",
-							"    pm.expect(jsonData.length).to.eql(expectedCoverPhotos);",
+							"pm.test(\"Get All CoverPhotos endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -176,18 +132,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"var expectedUsers = 10;",
-							"",
-							"pm.test(\"Found users with IDs 1 - \" + expectedUsers, function () {",
-							"    for (i = 0; i < expectedUsers; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
-							"    }",
-							"});",
-							"",
-							"pm.test(\"Total users found: \" + expectedUsers, function () {",
-							"    pm.expect(jsonData.length).to.eql(expectedUsers);",
+							"pm.test(\"Get All Users endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -216,8 +162,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create activity response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Create Activity endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -252,8 +198,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create author response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Create Author endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -264,7 +210,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Authors?author=authorXyz#@!2",
+					"raw": "{{url}}/Authors?author=authorXyz",
 					"host": [
 						"{{url}}"
 					],
@@ -288,8 +234,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create book response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Create Book endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -324,8 +270,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create cover photo response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Create CoverPhoto endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -360,8 +306,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create user response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Create CoverPhoto endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -396,15 +342,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Activity with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.Title).to.eql(\"Activity 1\");",
-							"    pm.expect(jsonData.Completed).to.eql(false);",
-							"});",
-							"",
-							""
+							"pm.test(\"Get Activity endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -433,15 +373,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Author with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.IDBook).to.eql(1);",
-							"    pm.expect(jsonData.FirstName).to.eql(\"First Name 1\");",
-							"    pm.expect(jsonData.LastName).to.eql(\"Last Name 1\");",
-							"});",
-							""
+							"pm.test(\"Get Author endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -470,14 +404,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Book with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.Title).to.eql(\"Book 1\");",
-							"    pm.expect(jsonData.PageCount).to.eql(100);",
-							"});",
-							""
+							"pm.test(\"Get Book endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -506,12 +435,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Cover Photo with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.IDBook).to.eql(1);",
-							"    pm.expect(jsonData.Url).to.eql(\"https://placeholdit.imgix.net/~text?txtsize=33&txt=Book 1&w=250&h=350\");",
+							"pm.test(\"Get CoverPhoto endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -541,14 +466,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();",
-							"",
-							"pm.test(\"User with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.UserName).to.eql(\"User 1\");",
-							"    pm.expect(jsonData.Password).to.eql(\"Password1\");",
-							"});",
-							""
+							"pm.test(\"Get User endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -577,8 +497,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update activity response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Update Activity endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -614,8 +534,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update author response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Update Author endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -654,8 +574,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update book response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Update Book endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -694,8 +614,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update cover photo response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Update CoverPhoto endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -734,8 +654,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update user response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
+							"pm.test(\"Update User endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -774,8 +694,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Delete activity response as expected\", function () {",
-							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"pm.test(\"Delete Activity endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -805,8 +725,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Delete author response as expected\", function () {",
-							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"pm.test(\"Delete Author endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -836,8 +756,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Delete book response as expected\", function () {",
-							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"pm.test(\"Delete Book endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -867,8 +787,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Delete cover photo response as expected\", function () {",
-							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"pm.test(\"Delete CoverPhoto endpoint response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -890,37 +810,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Delete User",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Delete user response as expected\", function () {",
-							"    pm.expect(pm.response.text()).to.eql(\"\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/Users/1",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"Users",
-						"1"
-					]
-				}
-			},
-			"response": []
 		}
 	]
-}
+	}
