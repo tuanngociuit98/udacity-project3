@@ -228,7 +228,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Activities?activity=activity123!@#",
+					"raw": "{{url}}/Activities?activity=activity123",
 					"host": [
 						"{{url}}"
 					],
@@ -264,7 +264,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Authors?author=authorXyz",
+					"raw": "{{url}}/Authors?author=authorXyz#@!2",
 					"host": [
 						"{{url}}"
 					],
