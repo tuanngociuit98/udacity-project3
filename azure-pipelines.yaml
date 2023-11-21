@@ -190,7 +190,7 @@ stages:
             -e \
             -o endurance-test-report
 
-    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
       displayName: 'Publish Endurance Test Results'
       inputs:
         htmlType: 'Jmeter'
@@ -206,7 +206,7 @@ stages:
             -l stress-test-report/stress-results.jtl \
             -e \
             -o stress-test-report
-    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
       displayName: 'Publish Stress Test Results'
       inputs:
         htmlType: 'Jmeter'
