@@ -114,7 +114,7 @@ stages:
         script:   |
            newman run RegressionTest.json \
             -e MyEnv.json \
-            -r cli,junitfull \
+            -r cli,junit \
             --reporter-junit-export JUnitReportRegression.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
@@ -126,7 +126,7 @@ stages:
         script: |
           newman run ValidationTest.json \
             -e MyEnv.json \
-            -r cli,junitfull \
+            -r cli,junit \
             --reporter-junit-export JUnitReportValidation.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
