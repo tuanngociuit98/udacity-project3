@@ -103,7 +103,6 @@ stages:
       inputs:
         script: |
          sudo npm install -g newman
-         sudo npm install reporter
 
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory
