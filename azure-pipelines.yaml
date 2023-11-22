@@ -97,7 +97,6 @@ stages:
       displayName: Install Node v16.X
       inputs:
         versionSpec: '16.x'
-
     - task: CmdLine@2
       displayName: Install Newman
       inputs:
