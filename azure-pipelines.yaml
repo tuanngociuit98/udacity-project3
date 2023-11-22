@@ -180,6 +180,7 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-perftests
 
+
     - task: Bash@3
       displayName: 'Endurance Test Suite'
       inputs:
@@ -231,8 +232,8 @@ stages:
               azureSubscription: $(azureServiceConnectionId)     # ToDo
               appName: $(webapp)               # ToDo
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-    
-        
+
+
   # #--------------------------------------------#  
   # Selenium | Functional UI Tests
   # ToDo: 
