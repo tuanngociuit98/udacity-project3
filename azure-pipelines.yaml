@@ -168,7 +168,6 @@ stages:
       displayName: 'Install JMeter 5.2.1'
       inputs:
         jmeterVersion: '5.2.1'
-
     - task: ArchiveFiles@2
       displayName: 'Archive EnduranceTestSuite'
       inputs:
