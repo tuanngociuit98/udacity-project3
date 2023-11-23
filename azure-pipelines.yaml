@@ -176,8 +176,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
       displayName: 'Upload Package'
       artifact: drop-perftests
-
-
+      
     - task: Bash@3
       displayName: 'Endurance Test Suite'
       inputs:
