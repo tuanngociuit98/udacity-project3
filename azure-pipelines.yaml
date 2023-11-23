@@ -18,7 +18,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
   environmentName: 'test'
-  webapp: "udacity-project3"
+  webapp: "Udacity-Project3"
 stages:
 #--------------------------------------------#  
 # BUILD STAGE
@@ -176,7 +176,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
       displayName: 'Upload Package'
       artifact: drop-perftests
-      
+
     - task: Bash@3
       displayName: 'Endurance Test Suite'
       inputs:
