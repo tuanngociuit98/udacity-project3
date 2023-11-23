@@ -9,6 +9,7 @@ trigger:
 # ToDo: Replace the agent pool name, if you are using Udacity Cloud lab. 
 # Otherwise, comment out the line below. 
 pool: myAgentPool
+
 variables:
   python.version: '3.8.0'
   # ToDo: Replace the service connection name as used in the DevOps project settings
